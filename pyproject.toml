@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "task-bar-to-do"
+version = "0.1.0"
+description = "macOS menu bar todo app, browser overlay and MCP server backed by Supabase."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.13"
+
+[tool.setuptools.packages.find]
+include = ["todo_app*"]
+
+[tool.setuptools.package-data]
+"todo_app.overlay" = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,11 @@
+{
+  "id": "todo-app",
+  "name": "to-do_app",
+  "description": "macOS menu bar to-do app with a floating todo panel that also serves the todo overlay and its HTTP API on 127.0.0.1:8421. Reads and writes a Supabase todos table and can export todos to an Obsidian vault.",
+  "kind": "launchd-agent",
+  "launchdLabel": "{{LABEL}}",
+  "schedule": "at login, restarts on crash",
+  "source": "{{APP_DIR}}",
+  "logs": ["{{LOG_FILE}}"],
+  "registeredAt": "{{TODAY}}"
+}

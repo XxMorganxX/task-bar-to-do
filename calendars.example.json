@@ -1,0 +1,12 @@
+{
+  "user_personal": {
+    "calendar_id": "you@gmail.com",
+    "display_name": "Personal",
+    "aliases": ["personal", "main"]
+  },
+  "user_work": {
+    "calendar_id": "you@company.com",
+    "display_name": "Work",
+    "aliases": ["work"]
+  }
+}
