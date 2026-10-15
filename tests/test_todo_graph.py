@@ -43,7 +43,7 @@ def test_related_ignores_zero_vectors():
 # --------------------------------------------------------------------------
 
 def test_normalize_entities_dedupes_case_insensitively_and_strips():
-    assert ent.normalize_entities(["Bill", "bill", "  Adam ", "", "Bill"]) == ["Bill", "Adam"]
+    assert ent.normalize_entities(["Bill", "bill", "  Carol ", "", "Bill"]) == ["Bill", "Carol"]
 
 
 def test_normalize_entities_rejects_non_list():
@@ -72,27 +72,27 @@ def test_heuristic_extractor_returns_empty():
 # --------------------------------------------------------------------------
 
 def test_case_variants_merge_to_one_canonical_form():
-    cmap = canonical_map(["LILY", "Lily", "lily"], {})
-    assert set(cmap.values()) == {"Lily"}  # mixed-case form wins over all-caps/lower
+    cmap = canonical_map(["ACME", "Acme", "acme"], {})
+    assert set(cmap.values()) == {"Acme"}  # mixed-case form wins over all-caps/lower
 
 
 def test_acronym_with_no_variant_is_left_untouched():
-    cmap = canonical_map(["AWS", "AWS", "Lily"], {})
+    cmap = canonical_map(["AWS", "AWS", "Acme"], {})
     assert cmap["AWS"] == "AWS"
 
 
 def test_explicit_alias_forces_a_merge():
-    aliases = {"reid wade startup club": "Reid Wade", "rw": "Reid Wade"}
-    cmap = canonical_map(["Reid Wade Startup Club", "RW", "Reid Wade"], aliases)
-    assert set(cmap.values()) == {"Reid Wade"}
+    aliases = {"jane doe startup club": "Jane Doe", "jd": "Jane Doe"}
+    cmap = canonical_map(["Jane Doe Startup Club", "JD", "Jane Doe"], aliases)
+    assert set(cmap.values()) == {"Jane Doe"}
 
 
 def test_canonicalize_mapping_consolidates_across_todos_and_dedupes():
-    by_id = {"a": ["LILY", "Ayham"], "b": ["Lily"], "c": ["lily", "Lily"]}
+    by_id = {"a": ["ACME", "Erin"], "b": ["Acme"], "c": ["acme", "Acme"]}
     out = canonicalize_mapping(by_id, {})
-    assert out["a"] == ["Lily", "Ayham"]
-    assert out["b"] == ["Lily"]
-    assert out["c"] == ["Lily"]  # deduped after canonicalization
+    assert out["a"] == ["Acme", "Erin"]
+    assert out["b"] == ["Acme"]
+    assert out["c"] == ["Acme"]  # deduped after canonicalization
 
 
 # --------------------------------------------------------------------------

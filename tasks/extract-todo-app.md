@@ -38,9 +38,9 @@ The app must run with no imports from, paths into, or processes owned by HomeAss
 - **iCloud-safe layout** (superseded by the move to `~/Development`). Desktop is iCloud-synced and HomeAssist was hit by eviction
   (see HomeAssistV3 `tasks/icloud-eviction-recovery.md`). `venv`, `logs`, `state` are
   symlinks to `*.nosync` dirs, as in HomeAssist.
-- **Lifecycle: own launchd agent** `com.morgannstuart.todo-app`, running the menu bar
+- **Lifecycle: own launchd agent** `local.todo-app`, running the menu bar
   app (it embeds the overlay HTTP server on 8421). Starts at login, restarts on crash.
-  Registered in Daemon Deck. Replaces HomeAssist's `homeassist run` starting the UI.
+  Registered in the local background-systems registry. Replaces HomeAssist's `homeassist run` starting the UI.
 - **Own venv** (Python 3.13, same pinned versions HomeAssist uses).
 
 ## Approach
@@ -79,7 +79,7 @@ The app must run with no imports from, paths into, or processes owned by HomeAss
   `assistant_framework/discord_bot/state/todos/...` — its `todo_graph/config.py` uses
   `parents[2]`, one level short. Seeded from there. The fork uses `settings` so it's moot.
 - 2026-10-08 — Renamed menu bar distributed notifications
-  `com.homeassist.todos.{toggle,show}` → `com.morgannstuart.todo-app.*` so a stray
+  `com.homeassist.todos.{toggle,show}` → `local.todo-app.*` so a stray
   HomeAssist menubar could never answer the app's launcher.
 - 2026-10-08 — launchd logs go to `~/Library/Logs/todo-app/`, not the Desktop:
   `com.homeassist.mcp` (stderr under `~/Desktop`) sits at exit 78 EX_CONFIG, consistent
@@ -104,14 +104,14 @@ The app must run with no imports from, paths into, or processes owned by HomeAss
 - 2026-10-08 — User ran the old-UI `pkill` + `todo install`. Agent running (pid 14697),
   holding 8421, panel loaded data from Supabase, old `todo_overlay`/`todo_menubar`
   processes gone. TCC was not an issue: launchd's Python reads `~/Desktop/to-do_app` fine
-  (logs are outside the Desktop). Daemon Deck shows `todo-app` as running.
+  (logs are outside the Desktop). The background-systems registry shows `todo-app` as running.
 
 - 2026-10-08 — Moved to `~/Development/to-do_app` at the user's request. Development
   isn't iCloud-synced, so dropped the `*.nosync` symlinks (`venv`, `logs`, `state` are
   plain dirs). A venv can't be relocated, so it was recreated + `pip install -e .`;
   135 passed. Repointed the plist, manifest `source`, the Desktop `.app` shortcut, the
   Claude MCP config (Connected), and HomeAssist's `todo-ui` pointer message. Reinstalled
-  the agent: running from the new venv, 8421 healthy, Daemon Deck shows `todo-app running`.
+  the agent: running from the new venv, 8421 healthy, the background-systems registry shows `todo-app running`.
 
 - 2026-10-08 — User approved deletion. Removed from HomeAssistV3: `todo_overlay/`,
   `todo_menubar/`, `todo_mcp/`, `tests/test_todo_mcp_service.py`, the stale

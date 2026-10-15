@@ -13,7 +13,7 @@ URL="http://127.0.0.1:$(setting OVERLAY_PORT)"
 
 PLIST_DST="${HOME}/Library/LaunchAgents/${LABEL}.plist"
 LOG_FILE="${HOME}/Library/Logs/todo-app/menubar.log"
-# Optional: register with a background-systems registry (e.g. Daemon Deck) if one exists.
+# Optional: register with a background-systems registry if one exists.
 REGISTRY_DIR="${HOME}/.config/background-systems/registry"
 MANIFEST_DST="${REGISTRY_DIR}/todo-app.json"
 

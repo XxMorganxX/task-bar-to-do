@@ -108,7 +108,7 @@ class GraphEnricher:
     ) -> Dict[str, TodoEnrichment]:
         entities = self._entities_for(user, todos) if config.entities_enabled() else {}
         if entities:
-            # Consolidate name variants (LILY/Lily, aliases) across the whole set so
+            # Consolidate name variants (ACME/Acme, aliases) across the whole set so
             # each entity is one graph node. Pure + post-cache → free to re-run.
             entities = canonicalize_mapping(entities, config.ENTITY_ALIASES)
         related = self._related_for(user, todos) if config.related_enabled() else {}

@@ -56,12 +56,10 @@ ENTITY_TEMPERATURE = 0.0
 ENTITY_MAX = 4                  # cap entities per todo (keeps the graph legible)
 
 # Entity aliases — the easy merge knob. Map any variant (matched case-insensitively)
-# to the canonical display name on the right. Case-only variants (LILY/Lily/lily) are
+# to the canonical display name on the right. Case-only variants (ACME/Acme/acme) are
 # merged automatically and need no entry here; use this for nicknames, abbreviations,
-# and differing spellings. Example: "reid wade startup club": "Reid Wade".
-ENTITY_ALIASES = {
-    "lily": "Lily",
-}
+# and differing spellings. Example: "jane doe startup club": "Jane Doe".
+ENTITY_ALIASES: dict[str, str] = {}
 # Bump when the model or prompt changes so cached entities re-extract. The cache
 # key folds this in, so a model/prompt swap invalidates stale results on next run.
 ENTITY_PROMPT_VERSION = 3
@@ -71,7 +69,7 @@ ENTITY_SYSTEM_PROMPT = (
     "that to-dos involving the same collaborator can be linked together.\n"
     "Return ONLY specific people or organizations the task involves — collaborators, "
     "recipients, stakeholders, or teams the user would work with or contact "
-    "(e.g. 'Bill', 'Adam', the user's company).\n"
+    "(e.g. 'Bill', 'Carol', the user's company).\n"
     "Do NOT extract:\n"
     "- URLs, domains, website or blog names, or the authors/owners of any linked "
     "content (a link to simonwillison.net is NOT a person named Simon Willison).\n"

@@ -27,7 +27,7 @@ machine-specific paths, and enough setup docs that someone else can run it.
   No calendars file → calendar linking simply has no targets.
 - **Calendar→user mapping generalized**: match configured user names against the
   calendar key instead of hardcoded names. Same result for the current setup.
-- **launchd plist and Daemon Deck manifest become templates** rendered by
+- **launchd plist and registry manifest become templates** rendered by
   `todo install` from the repo's own location, so the repo works from any path. The
   manifest is only installed if `~/.config/background-systems/registry/` exists.
 - **Label + notification names**: generic default `local.todo-app`, defined once in
@@ -47,7 +47,7 @@ machine-specific paths, and enough setup docs that someone else can run it.
   machine's values moved to its `.env` / `calendars.json`, keeping the existing label so
   the installed agent didn't need re-registering. Service-account file renamed to
   `creds/google-service-account.json`.
-- 2026-10-08 — plist + Daemon Deck manifest are now templates rendered by `todo install`
+- 2026-10-08 — plist + registry manifest are now templates rendered by `todo install`
   from the repo's own path; the manifest is only written if the registry dir exists.
   Rendered plist diffed equal to the installed one.
 - 2026-10-08 — Sample data in tests/docstrings: names → Alice, employer → Northwind
@@ -62,5 +62,5 @@ machine-specific paths, and enough setup docs that someone else can run it.
   actual values in `.env`, `creds/*.json`, `calendars.json` plus key patterns: only false
   positives (public Google OAuth URLs; the launchd label in the extraction log).
   Restarted the agent on the new code: running, 4 calendars loaded from local config.
-- 2026-10-08 — Global git identity is a work account (`morgan@instalily.ai`); the GitHub
-  CLI is logged in as a personal account. Asked the user which identity to commit as.
+- 2026-10-08 — Global git identity is a different (work) account than the GitHub
+  CLI's personal account. Asked the user which identity to commit as.

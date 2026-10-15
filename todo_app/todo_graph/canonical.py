@@ -4,7 +4,7 @@ Two layers, applied in order:
   1. Explicit aliases (config.ENTITY_ALIASES) — user-editable forced merges,
      matched case-insensitively. The value is the canonical display name.
   2. Automatic case-merge — names identical ignoring case collapse to one casing,
-     preferring a mixed-case form ("Lily") over ALL-CAPS/all-lower ("LILY"/"lily").
+     preferring a mixed-case form ("Acme") over ALL-CAPS/all-lower ("ACME"/"acme").
      A name with no case-variant is left untouched, so acronyms ("AWS") survive.
 
 Pure: deterministic, no I/O, no model calls. Runs after cached extraction, so

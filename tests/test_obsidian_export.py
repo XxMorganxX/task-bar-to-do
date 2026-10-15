@@ -24,7 +24,7 @@ def _todo(**overrides):
     base = {
         "id": "todo_20260528_030019_8edbffd1",
         "user_id": "Alice",
-        "title": "Lily versioning",
+        "title": "Acme versioning",
         "details": None,
         "due_at": None,
         "completed": False,
@@ -44,7 +44,7 @@ def _todo(**overrides):
 # --------------------------------------------------------------------------
 
 def test_slugify_lowercases_and_hyphenates():
-    assert markdown.slugify("Lily Versioning!") == "lily-versioning"
+    assert markdown.slugify("Acme Versioning!") == "acme-versioning"
 
 
 def test_slugify_falls_back_when_empty():
@@ -81,9 +81,9 @@ def test_document_puts_kind_and_status_in_frontmatter():
 
 
 def test_document_body_is_a_clean_title_heading():
-    doc = markdown.render_todo_document(_todo(title="Lily versioning"), tz=UTC)
+    doc = markdown.render_todo_document(_todo(title="Acme versioning"), tz=UTC)
     body = doc.split("\n---\n", 1)[1]
-    assert body.lstrip().startswith("# Lily versioning")
+    assert body.lstrip().startswith("# Acme versioning")
 
 
 def test_document_has_no_templated_task_block_or_dataview_lines():
